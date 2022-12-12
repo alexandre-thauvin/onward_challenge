@@ -1,0 +1,3 @@
+include ':devices'
+include ':app'
+rootProject.name = "Onwd challenge"
