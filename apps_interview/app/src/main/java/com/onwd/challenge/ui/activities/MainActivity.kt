@@ -1,14 +1,20 @@
-package com.onwd.challenge
+package com.onwd.challenge.ui.activities
 
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.onwd.devices.DeviceInteractorStub
+import com.onwd.challenge.R
+import com.onwd.challenge.ui.fragments.DeviceFragment
+import com.onwd.devices.IDeviceInteractor
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val deviceInteractor by lazy { DeviceInteractorStub() }
+    @Inject
+    lateinit var deviceInteractor: IDeviceInteractor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container, DeviceFragment(deviceInteractor))
+            .add(R.id.fragment_container, DeviceFragment())
             .commit()
     }
 
