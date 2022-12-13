@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,6 +26,7 @@ class DeviceFragmentViewModel @Inject constructor(
     init {
         registerListenerForSearch {
             viewModelScope.launch {
+                Timber.d("device received")
                 devices.add(it)
                 _devicesFlow.emit(devices)
             }

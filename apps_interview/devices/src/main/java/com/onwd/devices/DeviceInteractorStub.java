@@ -1,6 +1,7 @@
 package com.onwd.devices;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class DeviceInteractorStub implements IDeviceInteractor {
     private IDeviceFoundListener mDeviceFoundListener;
@@ -9,7 +10,8 @@ public class DeviceInteractorStub implements IDeviceInteractor {
     public void startSearch() {
         Random random = new Random();
 
-        int numberOfDevicesToGenerate = random.nextInt(4);
+        // Changed to use a range and do not get 0 in order to emit at least 1 device
+        int numberOfDevicesToGenerate = ThreadLocalRandom.current().nextInt(1, 7);
 
         new Thread(() -> {
 
@@ -18,6 +20,8 @@ public class DeviceInteractorStub implements IDeviceInteractor {
             } catch (InterruptedException ignored) {
             }
 
+            // As said above if there is numberOfDevices == 0 so nothing is sent and there is no way to know the end
+            // Could implement error handling in the lib but missing some time
             for (int i = 0; i < numberOfDevicesToGenerate; i++) {
                 if (mDeviceFoundListener != null) {
                     mDeviceFoundListener.deviceFound(DeviceFactory.createRandomDevice(random));

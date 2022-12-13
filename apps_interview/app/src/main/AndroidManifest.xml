@@ -12,14 +12,19 @@
         android:theme="@style/Theme.OnwdChallenge">
         <activity
             android:name=".ui.activities.MainActivity"
+            android:exported="true"
             android:screenOrientation="sensorLandscape"
-            android:theme="@style/Theme.OnwdChallenge.NoActionBar"
-            android:exported="true">
+            android:theme="@style/Theme.OnwdChallenge.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activities.DeviceDetailActivity"
+            android:exported="true"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/Theme.OnwdChallenge.NoActionBar" />
     </application>
 
 </manifest>

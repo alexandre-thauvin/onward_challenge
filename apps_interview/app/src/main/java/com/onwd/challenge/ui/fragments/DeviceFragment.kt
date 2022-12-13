@@ -1,5 +1,6 @@
 package com.onwd.challenge.ui.fragments
 
+import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import com.onwd.challenge.R
 import com.onwd.challenge.databinding.FragmentDeviceBinding
 import com.onwd.challenge.ui.DevicesAdapter
+import com.onwd.challenge.ui.activities.DeviceDetailActivity
 import com.onwd.challenge.ui.viewmodels.DeviceFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -60,6 +62,9 @@ class DeviceFragment : Fragment() {
         }
         binding.buttonSearch.setOnClickListener {
             viewModel.startSearchDevices()
+        }
+        binding.buttonOpen.setOnClickListener {
+            startActivity(Intent(activity, DeviceDetailActivity::class.java))
         }
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.devicesFlow.flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED).collect {

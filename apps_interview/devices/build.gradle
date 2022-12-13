@@ -38,6 +38,7 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
 
     implementation deps.hiltAndroid
+    implementation deps.timber
     kapt deps.hiltAndroidCompiler
 
     testImplementation 'junit:junit:4.13.2'
