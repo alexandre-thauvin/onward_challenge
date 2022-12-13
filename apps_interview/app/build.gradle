@@ -34,6 +34,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -49,6 +53,7 @@ dependencies {
     implementation deps.hiltAndroid
     implementation deps.kotlinxCoroutinesAndroid
     implementation deps.kotlinxCoroutinesCore
+    implementation deps.timber
     kapt deps.hiltAndroidCompiler
 
     implementation 'io.reactivex.rxjava3:rxjava:3.0.9'

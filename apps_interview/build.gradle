@@ -12,6 +12,7 @@ buildscript {
                 hilt               : "2.44",
                 kotlin             : "1.6.0",
                 kotlinxCoroutines  : '1.6.1',
+                timber             : "5.0.1"
         ]
 
         deps = [
@@ -21,7 +22,8 @@ buildscript {
                 hiltAndroid                : "com.google.dagger:hilt-android:${versions.hilt}",
                 hiltAndroidCompiler        : "com.google.dagger:hilt-compiler:${versions.hilt}",
                 kotlinxCoroutinesAndroid   : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.kotlinxCoroutines}",
-                kotlinxCoroutinesCore      : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.kotlinxCoroutines}"
+                kotlinxCoroutinesCore      : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.kotlinxCoroutines}",
+                timber                     : "com.jakewharton.timber:timber:${versions.timber}"
 
         ]
     }
