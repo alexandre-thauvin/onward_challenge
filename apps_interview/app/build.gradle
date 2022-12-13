@@ -53,6 +53,7 @@ dependencies {
     implementation deps.hiltAndroid
     implementation deps.kotlinxCoroutinesAndroid
     implementation deps.kotlinxCoroutinesCore
+    implementation deps.androidxLifecycleRuntimeKtx
     implementation deps.timber
     kapt deps.hiltAndroidCompiler
 
