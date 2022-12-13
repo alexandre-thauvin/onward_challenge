@@ -26,11 +26,13 @@ class DeviceFragmentViewModel @Inject constructor(
         registerListenerForSearch {
             viewModelScope.launch {
                 devices.add(it)
+                _devicesFlow.emit(devices)
             }
         }
     }
 
     fun startSearchDevices() {
+        //we clear the list on each new research otherwise we might have duplicate devices
         devices.clear()
         viewModelScope.launch {
             startSearch()

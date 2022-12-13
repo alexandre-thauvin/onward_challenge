@@ -9,6 +9,7 @@ buildscript {
         versions = [
                 androidxFragmentKtx: "1.5.0",
                 androidxLifecycle  : "2.4.1",
+                androidxViewPager  : "1.0.0",
                 hilt               : "2.44.2",
                 kotlin             : "1.6.0",
                 kotlinxCoroutines  : '1.6.1',
@@ -19,6 +20,7 @@ buildscript {
                 androidxFragmentKtx        : "androidx.fragment:fragment-ktx:${versions.androidxFragmentKtx}",
                 androidxLifecycleRuntimeKtx: "androidx.lifecycle:lifecycle-runtime-ktx:${versions.androidxLifecycle}",
                 androidxViewModelScope     : "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.androidxLifecycle}",
+                androidxViewPager          : "androidx.viewpager2:viewpager2:${versions.androidxViewPager}",
                 hiltAndroid                : "com.google.dagger:hilt-android:${versions.hilt}",
                 hiltAndroidCompiler        : "com.google.dagger:hilt-compiler:${versions.hilt}",
                 kotlinxCoroutinesAndroid   : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.kotlinxCoroutines}",
