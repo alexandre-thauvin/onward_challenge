@@ -4,7 +4,6 @@ import com.onwd.challenge.api.usecases.RegisterListenerForSearch
 import com.onwd.challenge.api.usecases.StartSearch
 import com.onwd.challenge.internal.RegisterListenerFoSearchImpl
 import com.onwd.challenge.internal.StartSearchImpl
-import com.onwd.challenge.repositories.DeviceInteractorRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,8 +14,8 @@ import dagger.hilt.components.SingletonComponent
 internal object UsecasesModule {
 
     @Provides
-    fun providesStartSearch(deviceInteractorRepository: DeviceInteractorRepository): StartSearch = StartSearchImpl(deviceInteractorRepository)
+    fun providesStartSearch(startSearchImpl: StartSearchImpl): StartSearch = startSearchImpl
 
     @Provides
-    fun providesRegisterListener(deviceInteractorRepository: DeviceInteractorRepository): RegisterListenerForSearch = RegisterListenerFoSearchImpl(deviceInteractorRepository)
+    fun providesRegisterListener(registerListenerFoSearchImpl: RegisterListenerFoSearchImpl): RegisterListenerForSearch = registerListenerFoSearchImpl
 }
