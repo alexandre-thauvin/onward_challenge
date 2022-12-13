@@ -40,4 +40,5 @@ class DeviceFragmentViewModel @Inject constructor(
             startSearch()
         }
     }
+
 }
