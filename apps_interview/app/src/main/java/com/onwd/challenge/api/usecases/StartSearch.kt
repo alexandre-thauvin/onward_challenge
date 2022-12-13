@@ -1,6 +1,5 @@
 package com.onwd.challenge.api.usecases
 
-interface StartSearch {
-
+interface StartSearch{
     operator fun invoke()
 }
