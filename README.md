@@ -26,7 +26,7 @@ Below are the designs for both screens on a 9" Tablet.
 Use the available clip arts/ icons from Android Studio when needed. 
 
 ### Search
-![Search](mockups/1_search_screen.png "1 Search")
+![Search](apps_interview/mockups/1_search_screen.png "1 Search")
 
 ### Device Details
-![Device Details](mockups/2_device_screen.png "2 Device Details")
+![Device Details](apps_interview/mockups/2_device_screen.png "2 Device Details")
