@@ -14,7 +14,7 @@ class DeviceFactory {
         String deviceName = "Device-" + random.nextInt(5000);
         String firmwareVersion = mFirmwareVersions[random.nextInt(mFirmwareVersions.length)];
 
-        return new Device(deviceName, firmwareVersion, random.nextFloat(), getRandomDeviceStatus(random), getRandomDeviceType(random));
+        return new Device(deviceName, firmwareVersion, random.nextFloat(), getRandomDeviceStatus(random), random.nextInt(10000), getRandomDeviceType(random));
     }
 
     private static DeviceStatus getRandomDeviceStatus(Random random) {

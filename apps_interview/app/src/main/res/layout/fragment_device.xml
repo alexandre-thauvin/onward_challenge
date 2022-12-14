@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Open"
-            app:icon="@drawable/ic_open"
+            app:icon="@drawable/ic_regular_bluetooth"
             app:layout_constraintBottom_toBottomOf="@id/button_search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/button_search"

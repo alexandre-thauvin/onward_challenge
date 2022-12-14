@@ -1,6 +1,8 @@
 package com.onwd.devices;
 
-public interface IDevice {
+import java.io.Serializable;
+
+public interface IDevice extends Serializable {
     String getName();
 
     String getFirmwareVersion();
@@ -9,5 +11,9 @@ public interface IDevice {
 
     DeviceStatus getStatus();
 
+    int getSerialId();
+
     @DeviceType int getType();
+
+    int getTypeDrawableId();
 }

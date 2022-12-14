@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">ONWARD Coding Assignment</string>
     <string name="action_settings">Settings</string>
-    <string name="fragment_device_nb_device_found">Found %s devices</string>
+    <string name="fragment_device_nb_device_found">Found %1$d devices</string>
     <string name="common_close">Close</string>
+    <string name="fragment_device_detail_battery_value">%1$d%%</string>
 </resources>

@@ -81,21 +81,23 @@ class DeviceFragment : Fragment() {
             viewModel.startSearchDevices()
         }
         binding.buttonOpen.setOnClickListener {
-            viewModel.currentItem = viewPager2.currentItem
-            activity.showBackArrow()
-            val fragment = DeviceDetailFragment()
-            requireActivity().supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(fragment::class.java.name)
-                .commit()
+            //lifecycleScope.launch(Dispatchers.Main) {
+                viewModel.currentItem = viewPager2.currentItem
+                activity.showBackArrow()
+                val bundle = viewModel.createBundle()
+                requireActivity().supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, DeviceDetailFragment::class.java, bundle)
+                    .addToBackStack(DeviceDetailFragment::class.java.name)
+                    .commit()
+           // }
         }
     }
 
     private fun collectFlow(){
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.devicesFlow.flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED).collect {
-                binding.deviceFound.text = getString(R.string.fragment_device_nb_device_found, it.size.toString())
+                binding.deviceFound.text = getString(R.string.fragment_device_nb_device_found, it.size)
                 adapter.update(it)
                 if (viewModel.currentItem > -1){
                     //TODO to improve add a listener when the viewPager has finished to render

@@ -1,6 +1,8 @@
 package com.onwd.devices;
 
-public enum DeviceStatus {
+import java.io.Serializable;
+
+public enum DeviceStatus implements Serializable {
     Ok,
     Error
 }

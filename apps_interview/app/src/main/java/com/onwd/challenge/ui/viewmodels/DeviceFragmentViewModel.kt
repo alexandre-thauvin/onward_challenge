@@ -1,5 +1,6 @@
 package com.onwd.challenge.ui.viewmodels
 
+import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.onwd.challenge.api.usecases.RegisterListenerForSearch
@@ -25,12 +26,14 @@ class DeviceFragmentViewModel @Inject constructor(
 
     //Can be avoided if the api returns a list of IDevice instead of IDevice
     private val devices = mutableListOf<IDevice>()
+
     init {
         registerListenerForSearch {
             viewModelScope.launch {
                 Timber.d("device received")
                 devices.add(it)
-                _devicesFlow.emit(devices)
+                if (!_devicesFlow.tryEmit(devices))
+                    devices.remove(it)
             }
         }
     }
@@ -43,4 +46,14 @@ class DeviceFragmentViewModel @Inject constructor(
         }
     }
 
+    fun createBundle(): Bundle {
+        val device = devices[currentItem]
+        val bundle = Bundle()
+        bundle.putSerializable(CURRENT_DEVICE, device)
+        return bundle
+    }
+
+    companion object {
+        const val CURRENT_DEVICE = "CURRENT_DEVICE"
+    }
 }
