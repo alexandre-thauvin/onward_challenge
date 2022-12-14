@@ -33,6 +33,13 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+    }
+
+    testOptions {
+        unitTests {
+            unitTests.returnDefaultValues = true
+        }
     }
 
     buildFeatures {
@@ -61,7 +68,18 @@ dependencies {
 
     implementation 'io.reactivex.rxjava3:rxjava:3.0.9'
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    testImplementation project(":devices")
+    testImplementation deps.hiltAndroidTesting
+    testImplementation deps.jUnit
+    testImplementation deps.kotlinXCoroutinesTest
+    testImplementation deps.mockk
+    testImplementation deps.robolectric
+    testImplementation deps.turbine
+    kaptTest deps.hiltAndroidCompiler
+
+    androidTestImplementation deps.androidXTestjUnitExt
+    androidTestImplementation deps.hiltAndroidTesting
+    androidTestImplementation deps.mockkAndroid
+    kaptAndroidTest deps.hiltAndroidCompiler
 }

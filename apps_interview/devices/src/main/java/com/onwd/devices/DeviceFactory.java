@@ -1,8 +1,11 @@
 package com.onwd.devices;
 
+import androidx.annotation.VisibleForTesting;
+
 import java.util.Random;
 
-class DeviceFactory {
+@VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
+public class DeviceFactory {
     private DeviceFactory() {
     }
 

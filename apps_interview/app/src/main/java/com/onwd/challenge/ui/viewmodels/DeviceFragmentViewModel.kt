@@ -1,6 +1,7 @@
 package com.onwd.challenge.ui.viewmodels
 
 import android.os.Bundle
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.onwd.challenge.api.usecases.RegisterListenerForSearch
@@ -14,18 +15,20 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class DeviceFragmentViewModel @Inject constructor(
+internal class DeviceFragmentViewModel @Inject constructor(
     private val startSearch: StartSearch,
     registerListenerForSearch: RegisterListenerForSearch
 ) : ViewModel() {
 
+    //Instead of emitting a flow of data directly we could replace it with a UIState containing these data
     private val _devicesFlow: MutableSharedFlow<List<IDevice>> = MutableSharedFlow(replay = 1)
     val devicesFlow: SharedFlow<List<IDevice>> = _devicesFlow
 
     var currentItem = -1
 
     //Can be avoided if the api returns a list of IDevice instead of IDevice
-    private val devices = mutableListOf<IDevice>()
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    val devices = mutableListOf<IDevice>()
 
     init {
         registerListenerForSearch {
