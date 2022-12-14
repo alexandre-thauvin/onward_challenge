@@ -1,6 +1,5 @@
 package com.onwd.challenge.ui.fragments
 
-import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,14 +13,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.viewpager2.widget.ViewPager2
 import com.onwd.challenge.R
 import com.onwd.challenge.databinding.FragmentDeviceBinding
 import com.onwd.challenge.ui.DevicesAdapter
-import com.onwd.challenge.ui.activities.DeviceDetailActivity
+import com.onwd.challenge.ui.activities.MainActivity
 import com.onwd.challenge.ui.viewmodels.DeviceFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import kotlin.math.abs
 
 @AndroidEntryPoint
@@ -31,20 +31,34 @@ class DeviceFragment : Fragment() {
 
     private lateinit var binding: FragmentDeviceBinding
 
+    private lateinit var activity: MainActivity
+
+    private lateinit var adapter: DevicesAdapter
+
+    private lateinit var viewPager2: ViewPager2
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDeviceBinding.inflate(inflater, container, false)
+        activity = requireActivity() as MainActivity
+        activity.hideBackArrow()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = DevicesAdapter(arrayListOf())
-        val viewPager = binding.viewPager
-        viewPager.adapter = adapter
+        adapter = DevicesAdapter(arrayListOf())
+        initViewPager()
+        initListeners()
+        collectFlow()
+    }
+
+    private fun initViewPager(){
+        viewPager2 = binding.viewPager
+        viewPager2.adapter = adapter
         val compositePageTransformer = CompositePageTransformer()
         val margin = 56
         compositePageTransformer.addTransformer(MarginPageTransformer((margin * Resources.getSystem().displayMetrics.density).toInt()))
@@ -52,27 +66,42 @@ class DeviceFragment : Fragment() {
             val r = 1 - abs(position)
             page.scaleY = (0.80f + r * 0.20f)
         }
-        viewPager.setPageTransformer(compositePageTransformer)
-        viewPager.apply {
+        viewPager2.setPageTransformer(compositePageTransformer)
+        viewPager2.apply {
             clipChildren = false
             clipToPadding = false
             offscreenPageLimit = 5
             (getChildAt(0) as RecyclerView).overScrollMode =
                 RecyclerView.OVER_SCROLL_NEVER
         }
+    }
+
+    private fun initListeners(){
         binding.buttonSearch.setOnClickListener {
             viewModel.startSearchDevices()
         }
         binding.buttonOpen.setOnClickListener {
-            startActivity(Intent(activity, DeviceDetailActivity::class.java))
-        }
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.devicesFlow.flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED).collect {
-                Timber.d("devices list: $it")
-                binding.deviceFound.text = getString(R.string.fragment_device_nb_device_found, it.size.toString())
-                adapter.update(it)
-            }
+            viewModel.currentItem = viewPager2.currentItem
+            activity.showBackArrow()
+            val fragment = DeviceDetailFragment()
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(fragment::class.java.name)
+                .commit()
         }
     }
 
+    private fun collectFlow(){
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.devicesFlow.flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED).collect {
+                binding.deviceFound.text = getString(R.string.fragment_device_nb_device_found, it.size.toString())
+                adapter.update(it)
+                if (viewModel.currentItem > -1){
+                    delay(10)
+                    viewPager2.setCurrentItem(viewModel.currentItem, true)
+                }
+            }
+        }
+    }
 }

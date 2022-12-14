@@ -20,11 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.activities.DeviceDetailActivity"
-            android:exported="true"
-            android:screenOrientation="sensorLandscape"
-            android:theme="@style/Theme.OnwdChallenge.NoActionBar" />
     </application>
 
 </manifest>

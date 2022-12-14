@@ -21,6 +21,8 @@ class DeviceFragmentViewModel @Inject constructor(
     private val _devicesFlow: MutableSharedFlow<List<IDevice>> = MutableSharedFlow(replay = 1)
     val devicesFlow: SharedFlow<List<IDevice>> = _devicesFlow
 
+    var currentItem = -1
+
     //Can be avoided if the api returns a list of IDevice instead of IDevice
     private val devices = mutableListOf<IDevice>()
     init {
