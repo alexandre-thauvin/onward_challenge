@@ -7,4 +7,6 @@
     <color name="gray_accent">#FFCFD8DC</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="green_ok">#618A3D</color>
+    <color name="red_error">#8A0D0F</color>
 </resources>

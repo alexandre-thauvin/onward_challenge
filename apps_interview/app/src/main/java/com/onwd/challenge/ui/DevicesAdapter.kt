@@ -26,9 +26,9 @@ internal class DevicesAdapter(private val mDevices: ArrayList<IDevice>) :
         fun bind(device: IDevice) = with(viewBinding.root) {
             viewBinding.deviceName.text = device.name
             val drawableId = when (device.type){
-                DeviceType.TYPE_A -> R.drawable.ic_laptop
-                DeviceType.TYPE_B -> R.drawable.ic_mobile
-                else -> R.drawable.ic_watch
+                DeviceType.TYPE_A -> R.drawable.ic_regular_laptop
+                DeviceType.TYPE_B -> R.drawable.ic_regular_mobile
+                else -> R.drawable.ic_regular_watch
             }
             viewBinding.devicePic.setImageDrawable(ResourcesCompat.getDrawable(resources, drawableId, null))
         }

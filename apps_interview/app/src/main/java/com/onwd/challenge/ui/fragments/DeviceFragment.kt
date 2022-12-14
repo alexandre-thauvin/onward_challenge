@@ -98,6 +98,7 @@ class DeviceFragment : Fragment() {
                 binding.deviceFound.text = getString(R.string.fragment_device_nb_device_found, it.size.toString())
                 adapter.update(it)
                 if (viewModel.currentItem > -1){
+                    //TODO to improve add a listener when the viewPager has finished to render
                     delay(10)
                     viewPager2.setCurrentItem(viewModel.currentItem, true)
                 }
