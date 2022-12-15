@@ -5,25 +5,27 @@ import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.onwd.challenge.CoroutineTestRule
-import dagger.hilt.android.testing.HiltAndroidTest
-import dagger.hilt.android.testing.HiltTestApplication
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.test.runTest
+import com.onwd.challenge.ui.viewmodels.DeviceFragmentViewModel
+import dagger.hilt.android.testing.*
+import io.mockk.mockk
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@OptIn(ExperimentalCoroutinesApi::class)
+@HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
-class MainActivityTest {
-    @get:Rule
-    val coroutineTestRule: CoroutineTestRule = CoroutineTestRule()
+internal class MainActivityTest {
+
+    @get:Rule(order = 0)
+    var hiltRule = HiltAndroidRule(this)
 
     lateinit var context: Context
+
+    @BindValue
+    @JvmField
+    val viewModel = mockk<DeviceFragmentViewModel>(relaxed = true)
 
     @Before
     fun before() {
@@ -31,9 +33,8 @@ class MainActivityTest {
     }
 
     @Test
-    fun check_the_activity_is_starting_correctly() = runTest {
+    fun check_the_activity_is_starting_correctly() {
         val scenario = ActivityScenario.launch(MainActivity::class.java)
-        delay(5000)
         Assert.assertEquals(Lifecycle.State.RESUMED, scenario.state)
     }
 }

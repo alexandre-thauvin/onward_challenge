@@ -2,8 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    //id 'dagger.hilt.android.plugin'
-    id 'com.google.dagger.hilt.android'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -18,7 +17,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.onwd.challenge.CustomTestRunner"
     }
 
     buildTypes {
@@ -44,6 +43,10 @@ android {
 
     buildFeatures {
         viewBinding true
+    }
+
+    packagingOptions {
+        exclude 'META-INF/*'
     }
 }
 
@@ -79,15 +82,12 @@ dependencies {
     kaptTest deps.hiltAndroidCompiler
 
     androidTestImplementation deps.androidxTestCore
-    androidTestImplementation (deps.androidXTestEspressoCore) {
-        exclude module: "protobuf-lite"
-    }
+    androidTestImplementation(deps.androidXTestEspressoCore)
     androidTestImplementation deps.androidxTestjUnitExt
     androidTestImplementation deps.androidxTestRules
     androidTestImplementation deps.androidxTestRunner
     androidTestImplementation deps.hiltAndroidTesting
     androidTestImplementation deps.kotlinxCoroutinesTest
     androidTestImplementation deps.mockkAndroid
-    androidTestUtil deps.androidxTestOrchestrator
     kaptAndroidTest deps.hiltAndroidCompiler
 }
