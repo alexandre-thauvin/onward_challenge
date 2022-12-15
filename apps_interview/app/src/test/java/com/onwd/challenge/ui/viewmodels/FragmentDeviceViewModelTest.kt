@@ -65,6 +65,22 @@ internal class FragmentDeviceViewModelTest {
         coVerify { startSearchMock() }
     }
 
+    @Test
+    fun `should return selected device`() = runTest {
+        val expectedDevice = DeviceFactory.createRandomDevice(Random())
+        coEvery { registerListenerForSearchMock(any()) }.just(Runs)
+
+        val viewModel = obtainViewModel()
+        viewModel.devices.add(expectedDevice)
+        viewModel.currentItem = 0
+
+        val actualDevice = viewModel.getSelectedDevice()
+
+        assertEquals(
+            expectedDevice,
+            actualDevice)
+    }
+
     private fun obtainViewModel(): DeviceFragmentViewModel {
         return DeviceFragmentViewModel(
             startSearch = startSearchMock,

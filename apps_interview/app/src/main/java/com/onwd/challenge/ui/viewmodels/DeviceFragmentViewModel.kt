@@ -1,6 +1,5 @@
 package com.onwd.challenge.ui.viewmodels
 
-import android.os.Bundle
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -49,12 +48,7 @@ internal class DeviceFragmentViewModel @Inject constructor(
         }
     }
 
-    fun createBundle(): Bundle {
-        val device = devices[currentItem]
-        val bundle = Bundle()
-        bundle.putSerializable(CURRENT_DEVICE, device)
-        return bundle
-    }
+    fun getSelectedDevice() = devices[currentItem]
 
     companion object {
         const val CURRENT_DEVICE = "CURRENT_DEVICE"

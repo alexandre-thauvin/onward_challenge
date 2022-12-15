@@ -56,7 +56,7 @@ class DeviceFragment : Fragment() {
         collectFlow()
     }
 
-    private fun initViewPager(){
+    private fun initViewPager() {
         viewPager2 = binding.viewPager
         viewPager2.adapter = adapter
         val compositePageTransformer = CompositePageTransformer()
@@ -76,35 +76,40 @@ class DeviceFragment : Fragment() {
         }
     }
 
-    private fun initListeners(){
+    private fun initListeners() {
         binding.buttonSearch.setOnClickListener {
             viewModel.startSearchDevices()
         }
         binding.buttonOpen.setOnClickListener {
-            //lifecycleScope.launch(Dispatchers.Main) {
-                viewModel.currentItem = viewPager2.currentItem
-                activity.showBackArrow()
-                val bundle = viewModel.createBundle()
-                requireActivity().supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, DeviceDetailFragment::class.java, bundle)
-                    .addToBackStack(DeviceDetailFragment::class.java.name)
-                    .commit()
-           // }
+            viewModel.currentItem = viewPager2.currentItem
+            activity.showBackArrow()
+            val bundle = createBundle()
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, DeviceDetailFragment::class.java, bundle)
+                .addToBackStack(DeviceDetailFragment::class.java.name)
+                .commit()
         }
     }
 
-    private fun collectFlow(){
+    private fun collectFlow() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.devicesFlow.flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED).collect {
                 binding.deviceFound.text = getString(R.string.fragment_device_nb_device_found, it.size)
                 adapter.update(it)
-                if (viewModel.currentItem > -1){
+                if (viewModel.currentItem > -1) {
                     //TODO to improve add a listener when the viewPager has finished to render
                     delay(10)
                     viewPager2.setCurrentItem(viewModel.currentItem, true)
                 }
             }
         }
+    }
+
+    private fun createBundle(): Bundle {
+        val device = viewModel.getSelectedDevice()
+        val bundle = Bundle()
+        bundle.putSerializable(DeviceFragmentViewModel.CURRENT_DEVICE, device)
+        return bundle
     }
 }
