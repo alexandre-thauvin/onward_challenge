@@ -1,6 +1,5 @@
 package com.onwd.challenge.ui.viewmodels
 
-import android.os.Bundle
 import com.onwd.challenge.api.usecases.RegisterListenerForSearch
 import com.onwd.challenge.api.usecases.StartSearch
 import com.onwd.challenge.utils.CoroutineTestRule
@@ -8,7 +7,6 @@ import com.onwd.devices.DeviceFactory
 import com.onwd.devices.IDevice
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
-import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -31,9 +29,6 @@ internal class FragmentDeviceViewModelTest {
 
     @MockK
     lateinit var registerListenerForSearchMock: RegisterListenerForSearch
-
-    @RelaxedMockK
-    lateinit var bundleMockk: Bundle
 
     private lateinit var devicesFlow: MutableSharedFlow<List<IDevice>>
 
