@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.onwd.challenge.api.usecases.RegisterListenerForSearch
 import com.onwd.challenge.api.usecases.StartSearch
 import com.onwd.devices.IDevice
+import com.onwd.devices.IDeviceFoundListener
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -29,14 +30,21 @@ internal class DeviceFragmentViewModel @Inject constructor(
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     val devices = mutableListOf<IDevice>()
 
+    private val deviceFoundListener = IDeviceFoundListener {
+        onDeviceFoundListener(it)
+    }
+
     init {
-        registerListenerForSearch {
-            viewModelScope.launch {
-                Timber.d("device received")
-                devices.add(it)
-                if (!_devicesFlow.tryEmit(devices))
-                    devices.remove(it)
-            }
+        registerListenerForSearch(deviceFoundListener)
+    }
+
+    @VisibleForTesting
+    fun onDeviceFoundListener(device: IDevice){
+        viewModelScope.launch {
+            Timber.d("device received")
+            devices.add(device)
+            if (!_devicesFlow.tryEmit(devices))
+                devices.remove(device)
         }
     }
 
