@@ -11,7 +11,7 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal object UsecasesModule {
+internal object UseCasesModule {
 
     @Provides
     fun providesStartSearch(startSearchImpl: StartSearchImpl): StartSearch = startSearchImpl

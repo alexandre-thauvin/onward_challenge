@@ -14,70 +14,70 @@
         app:layout_constraintGuide_percent="0.4" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_marginVertical="24dp"
-        android:layout_marginStart="24dp"
-        android:padding="10dp"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_marginVertical="24dp"
+        android:layout_marginStart="24dp"
         android:background="@drawable/color_on_primary_background_left_rounded_corners"
+        android:padding="10dp"
         app:layout_constraintEnd_toStartOf="@id/vertical_guideline"
         app:layout_constraintStart_toStartOf="parent">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/ic_solid_circle"
-                android:id="@+id/device_status"
-                app:tint="@color/green_ok"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/device_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_solid_circle"
+            app:tint="@color/green_ok" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_marginStart="16dp"
-                android:id="@+id/device_status_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/dark_gray"
-                android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@id/device_status"
-                app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/device_status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/dark_gray"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@id/device_status"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_marginEnd="16dp"
-                android:id="@+id/device_battery_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/dark_gray"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toStartOf="@id/device_battery_icon"
-                app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/device_battery_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/dark_gray"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@id/device_battery_icon"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/device_battery_icon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:id="@+id/device_pic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/device_pic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_marginVertical="24dp"
-        android:layout_marginEnd="24dp"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:padding="40dp"
+        android:layout_marginVertical="24dp"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/color_secondary_variant_background_right_rounded_corners"
         android:orientation="vertical"
+        android:padding="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/vertical_guideline">
 

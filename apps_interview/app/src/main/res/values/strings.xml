@@ -4,4 +4,5 @@
     <string name="fragment_device_nb_device_found">Found %1$d devices</string>
     <string name="common_close">Close</string>
     <string name="fragment_device_detail_battery_value">%1$d%%</string>
+    <string name="device_type_content_description">Device type</string>
 </resources>

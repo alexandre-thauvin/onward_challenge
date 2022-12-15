@@ -1,5 +1,7 @@
 package com.onwd.challenge.internal
 
+import com.onwd.challenge.internal.RegisterListenerFoSearchImpl
+import com.onwd.challenge.internal.StartSearchImpl
 import com.onwd.challenge.repositories.DeviceInteractorRepository
 import com.onwd.devices.IDeviceFoundListener
 import io.mockk.*

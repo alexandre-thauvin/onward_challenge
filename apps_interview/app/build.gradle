@@ -64,6 +64,7 @@ dependencies {
     implementation deps.kotlinxCoroutinesCore
     implementation deps.androidxLifecycleRuntimeKtx
     implementation deps.timber
+    androidTestImplementation project(path: ':app')
     kapt deps.hiltAndroidCompiler
 
     implementation 'io.reactivex.rxjava3:rxjava:3.0.9'
@@ -72,14 +73,21 @@ dependencies {
     testImplementation project(":devices")
     testImplementation deps.hiltAndroidTesting
     testImplementation deps.jUnit
-    testImplementation deps.kotlinXCoroutinesTest
+    testImplementation deps.kotlinxCoroutinesTest
     testImplementation deps.mockk
-    testImplementation deps.robolectric
     testImplementation deps.turbine
     kaptTest deps.hiltAndroidCompiler
 
-    androidTestImplementation deps.androidXTestjUnitExt
+    androidTestImplementation deps.androidxTestCore
+    androidTestImplementation (deps.androidXTestEspressoCore) {
+        exclude module: "protobuf-lite"
+    }
+    androidTestImplementation deps.androidxTestjUnitExt
+    androidTestImplementation deps.androidxTestRules
+    androidTestImplementation deps.androidxTestRunner
     androidTestImplementation deps.hiltAndroidTesting
+    androidTestImplementation deps.kotlinxCoroutinesTest
     androidTestImplementation deps.mockkAndroid
+    androidTestUtil deps.androidxTestOrchestrator
     kaptAndroidTest deps.hiltAndroidCompiler
 }

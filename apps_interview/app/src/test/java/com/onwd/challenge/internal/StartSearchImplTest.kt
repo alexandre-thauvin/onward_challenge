@@ -1,5 +1,6 @@
 package com.onwd.challenge.internal
 
+import com.onwd.challenge.internal.StartSearchImpl
 import com.onwd.challenge.repositories.DeviceInteractorRepository
 import io.mockk.*
 import io.mockk.impl.annotations.MockK

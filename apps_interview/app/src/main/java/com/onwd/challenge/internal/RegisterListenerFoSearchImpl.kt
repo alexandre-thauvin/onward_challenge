@@ -6,7 +6,7 @@ import com.onwd.devices.IDeviceFoundListener
 import javax.inject.Inject
 
 internal class RegisterListenerFoSearchImpl
-@Inject constructor(val deviceInteractorRepository: DeviceInteractorRepository) : RegisterListenerForSearch {
+@Inject constructor(private val deviceInteractorRepository: DeviceInteractorRepository) : RegisterListenerForSearch {
     override fun invoke(deviceFoundListener: IDeviceFoundListener) {
         deviceInteractorRepository.registerListener(deviceFoundListener)
     }
